@@ -10,14 +10,22 @@
     <!-- Import the rita library for text generation -->
     <script src="libraries/rita/rita-full.js"></script>
 
-    <link rel='stylesheet' href='/libraries/prism.css'/>
 </head>
 <body>
-<div class="code" id="source">
-    <pre>
-        <code id="source-code" class="language-java"></code>
-    </pre>
-</div>
+
+<header>
+    <h1>
+        <span id="main-title">Talk like your mom</span>
+        <span id="subtitle">Write in the style of someone else</span>
+    </h1>
+</header>
+
+<section>
+    <h2>Sentences</h2>
+    <button type="button" id="generateSentence">Generate sentences</button>
+    <p id="sentences"></p>
+</section>
+
 <script src="sketch.js"></script>
 </body>
 

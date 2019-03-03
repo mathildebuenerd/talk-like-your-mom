@@ -3,29 +3,36 @@ export class TextGeneration {
     constructor() {
         console.log(`je construis`)
         // The parameter is the n-grams
-        this.markov = new RiMarkov(4);
+        this.markov = new RiMarkov(3);
     }
 
     setup() {
-        // Add a listener to the button
         this.setupButtons();
 
-
-        RiTa.loadString('data/rem.txt', (data1) => {
-                this.markov.loadText(data1);
-                // this.markov.loadText(data2);
-                this.generate(this.markov);
+        RiTa.loadString('data/rem.txt', (strings) => {
+            console.log(`data1`, strings)
+            this.markov.loadText(strings);
+            this.countWords(strings);
+            this.generate(this.markov);
         });
     }
 
     generate(mark) {
-        const lines = mark.generateSentences(2);
-        console.log(lines.join(' '));
-        const sentences = document.querySelector(`#sentences`);
-        sentences.textContent = lines.join(' ');
+        const sentences = [];
+        for (let i=0; i<10; i++) {
+            sentences.push(mark.generateSentences(1));
+        }
+        const sentencesElt = document.querySelector(`#sentences`);
+        sentencesElt.textContent = sentences;
+    }
+
+    countWords(strings) {
+        // Return the occurence of each word
+        console.log(RiTa.concordance(strings));
     }
 
     setupButtons() {
+        // Add the listeners to the UI elements
         const generateButton = document.querySelector(`#generateSentence`);
         generateButton.addEventListener(`click`, () => {
             console.log("button markov", this.markov)
